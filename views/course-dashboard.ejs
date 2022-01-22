@@ -142,49 +142,21 @@
       </p>
       <div class="small-card-container" id="suggested-books-container" style="display: flex; flex-wrap: wrap; width: 100%;">
 
+        <% for(var i=0; i<5; i++){ %>
           <div class="bookcard" id="book-card" style="height: 150px;">
             <div class="booktitle-container">
               <p class="booktitle">
-                <% books %> 
+                <% books[i].volumeInfo.title %> 
               </p>
             </div>
           </div>
-          <div class="bookcard" id="book-card" style="height: 150px;">
-            <div class="booktitle-container">
-              <p class="booktitle">
-                Book Title
-              </p>
-            </div>
-          </div>
-          <div class="bookcard" id="book-card" style="height: 150px;">
-            <div class="booktitle-container">
-              <p class="booktitle">
-                Book Title
-              </p>
-            </div>
-          </div>
-          <div class="bookcard" id="book-card" style="height: 150px;">
-            <div class="booktitle-container">
-              <p class="booktitle">
-                Book Title
-              </p>
-            </div>
-          </div>
-          <div class="bookcard" id="book-card" style="height: 150px;">
-            <div class="booktitle-container">
-              <p class="booktitle">
-                Book Title
-              </p>
-            </div>
-          </div>
-         
+        <% } %>
+       
     </div>
 
   </div>
   </div>
 
-
-  </div>
 </body>
 
 </html>

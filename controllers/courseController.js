@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const courseService = require("../services/courseService");
+const googleBookService = require("../services/googleBookService");
 
 router.get("/allcourses", async (req, res) => {
   const userId = req.session.userId;
@@ -112,6 +113,7 @@ router.get("/dashboard", async (req, res) => {
   }
   const courseId = req.query.courseId;
   const courseDetails = await courseService.courseDetails(userId, courseId);
+  const books = await googleBookService.getBooksByTitle(courseDetails.course.title);
   res.render(
     "course-dashboard.ejs",
     {
@@ -121,10 +123,11 @@ router.get("/dashboard", async (req, res) => {
       id: courseDetails.course.id,
       back: "req.query.paramB",
       enrolled: courseDetails.enrolled,
-      books: courseDetails.course.books,
+      books: books,
       price: courseDetails.course.price,
       duration: courseDetails.course.duration,
       ecount: courseDetails.ecount,
+      reviews: courseDetails.reviews,
     },
     (error, ejs) => {
       if (error) {
