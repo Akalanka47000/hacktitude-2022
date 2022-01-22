@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const courseService = require("../services/courseService");
 const googleBookService = require("../services/googleBookService");
+const openExchangeRatesService = require("../services/openExchangeRatesService");
 
 router.get("/allcourses", async (req, res) => {
   const userId = req.session.userId;
@@ -114,6 +115,8 @@ router.get("/dashboard", async (req, res) => {
   const courseId = req.query.courseId;
   const courseDetails = await courseService.courseDetails(userId, courseId);
   const books = await googleBookService.getBooksByTitle(courseDetails.course.title);
+  const rate = await openExchangeRatesService.openExchangeRates(courseDetails.course.price, "USD", courseDetails.to );
+  console.log(courseDetails.to);
   res.render(
     "course-dashboard.ejs",
     {
