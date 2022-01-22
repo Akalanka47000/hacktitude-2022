@@ -82,7 +82,7 @@ function getUserCourses(userID) {
       .raw(sql, [userID])
       .then((courses) => {
         const injectedString = courses.map((c) => `'${c.cid}'`).join(", ");
-        const sql2 = `SELECT courses.id, courses.title, userCourses.score, userCourses.progress, userCourses.last_resumed_date FROM courses INNER JOIN userCourses WHERE id IN (${injectedString}) AND courses.id == userCourses.cid AND userCourses.uid = ?`;
+        const sql2 = `SELECT courses.id, courses.title, userCourses.score, userCourses.progress, userCourses.last_resumed_date, userCourses.pinned FROM courses INNER JOIN userCourses WHERE id IN (${injectedString}) AND courses.id == userCourses.cid AND userCourses.uid = ?`;
 
         knex_db
           .raw(sql2, [userID])
@@ -453,6 +453,31 @@ function getHacktitudeCourses(maxResults, title) {
   });
 }
 
+function changePin(courseId, userId) {
+  const sql1 = `SELECT pinned FROM userCourses WHERE cid = ? AND uid = ?`;
+  const sql2 = `UPDATE userCourses SET pinned = ? WHERE (cid = ? AND uid = ?)`;
+
+  return new Promise((resolve, reject) => {
+    knex_db
+      .raw(sql1, [courseId, userId])
+      .then((data) => {
+        let pinned = !(data.pinned);
+        console.log("pin: " + pinned);
+          knex_db
+            .raw(sql2, [pinned, courseId, userId])
+            .then(() => {
+              resolve();
+            })
+            .catch((error) => {
+              reject(error);
+            });
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
 module.exports = {
   getAllCourses,
   getUserCourses,
@@ -472,4 +497,5 @@ module.exports = {
   resumeLearning,
   updateProgress,
   getHacktitudeCourses,
+  changePin,
 };

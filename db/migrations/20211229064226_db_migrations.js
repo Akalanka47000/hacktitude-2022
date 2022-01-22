@@ -47,6 +47,7 @@ exports.up = function (knex) {
       table.int('progress').notNullable().defaultTo(0);
       table.string("review", 255);
       table.date("last_resumed_date");
+      table.boolean("pinned");
       table.primary(["cid", "uid"]);
     });
 };

@@ -101,6 +101,11 @@ async function getHacktitudeCourses(maxResults, title) {
     return getHacktitudeCourses;
 }
 
+async function changePin(courseId, userId) {
+    const changePin = courseRepository.changePin(courseId, userId);
+    return changePin;
+}
+
 module.exports = {
     allCourses,
     userCourses,
@@ -118,4 +123,5 @@ module.exports = {
     resumeLearning,
     updateProgress,
     getHacktitudeCourses,
+    changePin,
 }

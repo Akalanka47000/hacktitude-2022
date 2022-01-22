@@ -37,7 +37,9 @@
                                         <div class="card-heading orange narrow">
                                             <p class="card-heading">
                                                 <%= courses[i].title %>
+                                                <% if(courses[i].pinned) { %> 
                                                 <i id="pin-<%= courses[i].id %>" style="margin-left: 80px; transform: rotate(20deg); color: #E02401;" class="fas fa-thumbtack"></i>
+                                                <% } %> 
                                             </p>
                                         </div>
                                         <div class="progress-container">
