@@ -170,8 +170,8 @@ function getCourseDetails(userId, courseId) {
     var registeredCourses = await knex_db.raw(sql2, [courseId, userId]);
     var coursesCount = await knex_db.raw(sql3, [courseId]);
     var reviews = await knex_db.raw(sql4, [courseId]);
-    let to = await knex_db.raw(sql5, [userId]);
-    console.log(to);
+    let toData = await knex_db.raw(sql5, [userId]);
+    const to = toData[0].country_currency
     let ecount = coursesCount[0].count;
     if (registeredCourses.length > 0) {
       enrolled = "yes";

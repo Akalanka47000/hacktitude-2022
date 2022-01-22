@@ -3,14 +3,20 @@ const axios = require("axios").default;
 async function getExchangeRate(value, from, to) {
     return new Promise(async (resolve, reject) => {
         try {
-            const key = "932c9b9369824a619176694881bd76ad";
+            const key = "e7a6483e79a444baa23d773d128ac3d9";
             const response = await axios.get(
-                `https://openexchangerates.org/api/convert/${value}/${from}/${to}?app_id=${key}`
+                `https://openexchangerates.org/api/historical/2022-01-01.json?app_id=${key}`
             );
-            // console.log(response);
-            resolve(response.data.items);
+            const currencies = response.data.rates;
+            let convertedValue = ''
+            for (let [key, rate] of Object.entries(currencies)) {
+                if (key === to) {
+                    convertedValue = value*rate
+                }
+            }
+            resolve(convertedValue);
         } catch (error) {
-            console.log(error);
+            console.log(error)
             reject("Failed to fetch exchange rates");
         }
     });

@@ -115,7 +115,7 @@ router.get("/dashboard", async (req, res) => {
   const courseId = req.query.courseId;
   const courseDetails = await courseService.courseDetails(userId, courseId);
   const books = await googleBookService.getBooksByTitle(courseDetails.course.title);
-  const rate = await openExchangeRatesService.openExchangeRates(courseDetails.course.price, "USD", courseDetails.to );
+  const currencyVal = await openExchangeRatesService.openExchangeRates(courseDetails.course.price, "USD", courseDetails.to );
   console.log(courseDetails.to);
   res.render(
     "course-dashboard.ejs",
@@ -127,7 +127,8 @@ router.get("/dashboard", async (req, res) => {
       back: "req.query.paramB",
       enrolled: courseDetails.enrolled,
       books: books,
-      price: courseDetails.course.price,
+      price: currencyVal.toFixed(2),
+      currency_code: courseDetails.to,
       duration: courseDetails.course.duration,
       ecount: courseDetails.ecount,
       reviews: courseDetails.reviews,
