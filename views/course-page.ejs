@@ -74,7 +74,7 @@
         <div class="right-menu" id="contentlink1" ><iframe name="contentlink1" src="/course/mcq/<%= id %>" width="900" height="500"></iframe> </div>
         <form id="doneForm1" action="/course/updateProgress/<%= id %>/<%= 25 %>" method="GET" onSubmit="onFormSubmit(event)">
           <div class="right-menu" id="contentlink2" style="display: block;">
-            <span class="topic2"><span id="read-time-1">xx</span> seconds read</span>
+            <span class="topic2"><span id="read-time-1"><%= round((count)/(4)) %></span> seconds read</span>
             <p><%= chapters[0].description %></p> <button type="submit" id="btnChapterOne" class="btn">Mark as Done</button></div>
         </form>
 

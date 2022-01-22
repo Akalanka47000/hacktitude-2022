@@ -113,7 +113,9 @@ router.get("/dashboard", async (req, res) => {
   }
   const courseId = req.query.courseId;
   const courseDetails = await courseService.courseDetails(userId, courseId);
-  const books = await googleBookService.getBooksByTitle(courseDetails.course.title);
+  const books = await googleBookService.getBooksByTitle(
+    courseDetails.course.title
+  );
   res.render(
     "course-dashboard.ejs",
     {
@@ -183,6 +185,7 @@ router.get("/coursePage", async (req, res) => {
   const courseId = req.query.courseId;
   await courseService.resumeLearning(courseId, userId);
   const courseContent = await courseService.courseContentDetails(courseId);
+  const wordCount = courseContent.course.description.split(" ").length();
   res.render(
     "course-page.ejs",
     {
@@ -192,6 +195,7 @@ router.get("/coursePage", async (req, res) => {
       description: courseContent.course.description,
       id: courseContent.course.id,
       back: "req.query.paramB",
+      count: wordCount,
     },
     (error, ejs) => {
       if (error) {
@@ -308,20 +312,22 @@ router.get("/pin/:cid", async (req, res) => {
 
 router.get("/updateProgress/:courseId/:progress", async (req, res) => {
   const userId = req.session.userId;
-    if (!userId) {
-      res.redirect("/");
-      return;
-    }
+  if (!userId) {
+    res.redirect("/");
+    return;
+  }
   const courseId = req.params.courseId;
   const progress = req.params.progress;
-  await courseService.updateProgress(courseId, userId, progress)
+  await courseService.updateProgress(courseId, userId, progress);
   res.redirect(`/course/coursePage?courseId=${courseId}`);
-  
 });
 
 router.get("/getHacktitudeCourses", async (req, res) => {
-console.log(req.query)
-  const getHacktitudeCourses = await courseService.getHacktitudeCourses(req.query.maxResults, req.query.title);
+  console.log(req.query);
+  const getHacktitudeCourses = await courseService.getHacktitudeCourses(
+    req.query.maxResults,
+    req.query.title
+  );
   res.json({ courses: getHacktitudeCourses });
 });
 
