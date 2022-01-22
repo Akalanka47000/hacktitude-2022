@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/mcq.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <title>Assesment</title>
+
+
+    <style>
+.donate-now {
+    list-style-type: none;
+    margin: 25px 0 0 0;
+    padding: 0;
+  }
+  
+  .donate-now li {
+    float: left;
+    margin: 10px 0px 10px 0px;
+    width: 80%;
+    height: 40px;
+    color: #F75D57;
+    position: relative;
+  }
+
+  .donate-now label,
+  .donate-now input {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .donate-now input[type="radio"] {
+    opacity: 0.01;
+    z-index: 100;
+  }
+  
+  .donate-now input[type="radio"]:checked+label,
+  .Checked+label {
+    background-color: #311A75;
+  }
+  
+  .donate-now label {
+    padding-top: 10px;
+    padding-left: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 90;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    border-radius: 5px;
+    background: #FFF;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .question-text{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #311A75;
+  }
+
+  .Qsign{
+      font-size: 25px;
+      color: #F75D57;
+  }
+
+  .btn{
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    color: #E9E9E9;
+    background-color: #F75D57;
+    font-size: 20px;
+    width: 118px;
+    height: 42px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    letter-spacing: 0px;
+}
+
+button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
+
+  button[disabled]:hover{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
+
+.btn:hover{
+    background-color: #ce4541;
+}
+
+.modal-end{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 120px;
+    padding-bottom: 50px;
+}
+
+    </style>
+</head>
+<body style="background-color: #F9F9F9;">
+
+
+     <div class="modal-content" id="before">
+        <form method="post" action="/course/scores/<%= id %>">
+            
+            <% for(var i=0; i<3; i++){ %>
+                
+                    <div class="modal-header" style="height: 400px; border: none;">
+                        <p id="questiontxt" class="question-text"><span class="Qsign">Q<%= i+1 %>.</span> <%= que[i].questions %></p>
+
+                        <% for(var j=0; j < answer.length; j=j+4){%> 
+                            <% if (que[i].qid == answer[j].qid ){ %>
+                       
+                        <div class="modal-body">
+                            <div class="col-xs-3 5"> </div>
+                            <div id="quiz" data-toggle="buttons">
+                            
+                                <ul class="donate-now quiz" style="background-color: red;">
+                                    <li>
+                                        <input type="radio" id=<%= answer[j].aid %>  name="q<%= i  %>_answer" value="<%= answer[j].aid %>" >
+                                        <label for= <%= answer[j].aid %> > <%= answer[j].answer %> </label>
+                                    </li>
+    
+                                    <li>
+                                        <input type="radio" id=<%= answer[j+1].aid %> name="q<%= i %>_answer" value="<%= answer[j+1].aid %>" >
+                                        <label for= <%= answer[j+1].aid %> > <%= answer[j+1].answer %></label>
+                                    </li>
+    
+                                    <li>
+                                        <input type="radio" id=<%= answer[j+2].aid %> name="q<%= i %>_answer" value="<%= answer[j+2].aid %>" >
+                                        <label for=<%= answer[j+2].aid %>><%= answer[j+2].answer %></label>
+                                    </li>
+    
+                                    <li>
+                                        <input type="radio" id=<%= answer[j+3].aid %> name="q<%= i %>_answer" value="<%= answer[j+3].aid %>" >
+                                        <label for=<%= answer[j+3].aid %> > <%= answer[j+3].answer %> </label>
+                                    </li>
+                            </ul>
+                            <% } %>
+                            <% } %>
+                        
+                    </div>
+
+                
+                        </div>  
+
+                       
+
+                        </div>    
+                        
+                      
+                                <% } %>
+
+                                <div class="modal-end">
+                                    <button type="submit" id="nextbtn" class="btn" >Submit</button>
+                               </div>
+            
+               
+        </form>
+    </div>      
+
+
+</body>
+</html>

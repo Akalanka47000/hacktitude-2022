@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Home</title>
+</head>
+
+<body>
+    <%- include('navbar', {page: 'home'}) -%>
+    <div class="dashboard-main-container" style="padding-bottom: 5px; margin-bottom: 20px;">
+
+        <img id="user-flag" src=""  height="25px" style="margin-top: 28px; margin-left: 55px;  border-radius: 2px; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+
+        <p class="name" style="margin-left: 10px;"><span class="orange">Hi</span> <span class="blue">
+                <%= userName %> [<span class="orange narrow" style="font-weight: 600;" id="user-grade">!!</span>],
+            </span></p>
+
+    </div>
+
+    
+
+    <div class="dashboard-container">
+        <div class="left">
+            <% if (courses.length<1) {%>
+                <div style="margin-top: -50px;">
+                    <p class="empty-informer narrow">You aren't enrolled in any courses. 
+                        Please visit 
+                        <a href="/course/allcourses" class="link-to-course">
+                            Courses Page
+                        </a>
+                        to enroll.</p>
+                </div>
+            <%} else {%>
+                <div>
+                    <div>
+                        <p class=" info">Currently Enrolled : <span class="orange">0<%= courses.length %></span></p>
+                    </div>
+                    <div class="cards-container">
+                        <% for(var i=0; i<courses.length; i++){ %>
+                            <% if(courses[i].score < 0){ %>
+                                <a href="/course/dashboard?courseId=<%= courses[i].id %>">
+                                    <div class="card">
+                                        <div class="card-heading orange narrow">
+                                            <p class="card-heading">
+                                                <%= courses[i].title %>
+                                            </p>
+                                        </div>
+                                        <div class="progress-container">
+                                            <p class="progress-text blue">Progress <span class="orange">0%</span>
+                                            </p>
+                                            <progress class="progress" id="file" value="0" max="100"> 32%
+                                            </progress>
+                                        </div>
+                                    </div>
+                                </a>
+                            <% }else{ %>
+                                <div class="card-completed ">
+                                    <div class="card-heading orange narrow">
+                                        <p class="card-heading">
+                                            <span class="topic1">
+                                                <%= courses[i].title %>
+                                            </span> <br>
+                                            <span class="topic2">
+                                                <%= courses[i].level %>
+                                            </span>
+                                        </p>
+                                        </p>
+                                    </div>
+                                    <div class="progress-container">
+                                        <p class="progress-text blue"
+                                            style="font-size: 23px; margin-top: -20px;">Score <span
+                                                class="orange">
+                                                <%= courses[i].score %>
+                                            </span></p>
+                                        <p class="progress-text blue" style="margin-top: -20px;">
+                                            Progress <span class="orange">Completed</span></p>
+                                    </div>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+            <%}%>
+
+            <div id="popular-courses">
+                <p style="font-size: 25px; font-weight: 600;" class="orange">Or get started with some of our most popular courses.</p>
+                <div  class="popular-courses-container" id="popular-courses-container">
+                    <% for(var i=0; i<5; i++){ %>
+                        <a href="#">
+                            <div class="small-card-home">
+                                <div class="card-heading orange narrow">
+                                    <div class="card-heading-container">
+                                        <p class="card-heading" id="card-heading-<%= i %>" style="line-height: 25px;">
+                                            Sample <br/> Course <%= i+1 %>
+                                        </p>
+                                    </div>
+                                    <p class="level blue" style="margin-top: 20px;">
+                                        Level ?
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="right">
+            <div style="margin-top: -20px;">
+                <p class="orange narrow" style="line-height: 30px; font-size: 36px; font-weight: 500; color: #3F3D56;"> Recently Added</p>
+                <div id="home_recent" class="small-card-container" style="margin-top: -15px;">
+                    
+                    <% for(var i=0; i<recentCourses.length; i++){ %>
+                        <a href="/course/dashboard?courseId=<%= recentCourses[i].id %>">
+                            <div class="small-card-home">
+                                <div class="card-heading orange narrow">
+                                    <div class="card-heading-container">
+                                        <p class="card-heading" style="line-height: 25px;">
+                                            <%= recentCourses[i].title %>
+                                        </p>
+                                    </div>
+                                    <p class="level blue" style="margin-top: 20px;">
+                                        <%= recentCourses[i].level %>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    <% } %>
+                </div>
+           </div>
+        </div>
+
+
+
+
+
+
+    </div>
+ 
+
+
+
+    <script>
+        $('document').ready(()=>{
+      
+          $.ajax({url: "/user/flag", success: function(result){
+
+            $('#user-flag').attr("src", result.flag);
+        
+          }});
+        })
+      </script>
+        
+               
+
+</body>
+</html>
+
+
+
+
+

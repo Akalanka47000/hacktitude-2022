@@ -1,0 +1,21 @@
+    <div class="navbar-container">
+        <div class="navlogo-container">
+            <img style="width: 150px;" src="../assets/logo.png">
+        </div>
+        <div class="nav-btn-container">
+            <a href="/user/home" class="<%- page =='home' ? 'active' : 'nav-link' %> narrow" id="nav-link-home">
+                <p>Home</p>
+            </a>
+            <a href="/course/allcourses" class="<%- page =='all-courses' ? 'active' : 'nav-link' %> narrow" id="nav-link-all">
+                <p>All Courses</p>
+            </a>
+            <a href="/course/enrolled" class="<%- page =='enrolled' ? 'active' : 'nav-link' %> narrow" id="nav-link-enrolled">
+                <p>Enrolled</p>
+            </a>
+            <form action="/user/signout" method="POST">
+                <div>
+                    <span class="divider">| </span><button class="signout"> Logout</button>
+                </div>
+            </form>
+        </div>
+    </div>

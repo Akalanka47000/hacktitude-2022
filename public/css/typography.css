@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+p{
+    font-family: 'Poppins', sans-serif;
+}
+
+.heading-text{
+    color: #311A75;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: -1px;
+}
+
+input{
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    
+}
+
+.links{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+a{
+    color: #FFBE0B;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* a:hover{
+    color: #e7aa00;
+} */
+
+.narrow{
+    letter-spacing: -1px;
+}
+
+::placeholder { 
+    color: #B5B5B5;
+}
+
+.signinn{
+    color: #F75D57;
+}
+
+.signinn:hover{
+    color: #311A75;
+}
+
+.al{
+color: #3F3D56 ;
+}
+
+/* a:hover{
+    color: #3F3D56;
+} */
+
+.guest{
+    color: #311A75;
+}
+
+.new{
+    color: #3F3D56 ;
+    padding-left: 20px;  
+}
+
+.signup{
+    color: #311A75;
+    padding-left: 43px;
+}
+
+.topic{
+    padding-left: 57px;
+    padding-bottom: 8px;
+    padding-top: 38px;
+}
+
+.topic1{    
+    font-size: 25px;
+    line-height: 0px;  
+    color: #3F3D56;
+}
+
+.topic2{    
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    line-height: 0px;  
+    color: #929497;
+}

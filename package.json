@@ -1,0 +1,45 @@
+{
+  "name": "node-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --env=jsdom --config=jest.config.js",
+    "start": "node server.js",
+    "start-dev": "nodemon server.js",
+    "delete-db": "del-cli main.sqlite",
+    "migrate": "npm run delete-db && knex migrate:latest --knexfile knexfile.js",
+    "seed": "knex seed:run --knexfile knexfile.js",
+    "db": "npm run migrate && npm run seed"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.16.3",
+    "express-flash": "0.0.2",
+    "express-request-mock": "^3.1.0",
+    "express-session": "^1.17.2",
+    "knex": "^0.95.15",
+    "mongoose": "^5.2.9",
+    "node-fetch": "^2.0.0",
+    "node-localstorage": "^2.2.1",
+    "node-sessionstorage": "^1.0.0",
+    "object-path": "^0.11.4",
+    "selenium-webdriver": "^4.1.0",
+    "sqlite3": "^5.0.2",
+    "swagger-ui-express": "^4.0.0"
+  },
+  "devDependencies": {
+    "del-cli": "^4.0.1",
+    "eslint-config-rallycoding": "^3.2.0",
+    "jest": "^27.0.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^6.1.6",
+    "supertest-session": "^4.1.0"
+  }
+}

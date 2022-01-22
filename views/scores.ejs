@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/mcq.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <title>Assesment</title>
+</head>
+
+<style>
+    .score-container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        font-weight: 700;
+        font-size: 50px;
+        flex-direction: column;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .blue{
+    color: #311A75;
+}
+
+.orange{
+    color: #F75D57;
+}
+</style>
+<body style="background-color: #F9F9F9;">
+
+   <div class="score-container" style="padding: 20%;">
+       <p class="orange">Your Score - <span class="blue"> <%= score %></span></p>
+       <p class="topic2" style="font-size: 20px;">Average score of other users is <span class="blue" id="average-score">xx</span> for this course.</p>
+   </div>
+
+</body>
+</html>

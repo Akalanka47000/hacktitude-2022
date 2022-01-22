@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/typography.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="left-container">
+            <form action="/user/signin" method="POST">
+                <div class="form-container">
+                    <p class="heading-text">Login</p>
+                    <input name="email" type="email" id="email" placeholder="Email">
+                    <input name="password" type="password" id="password" placeholder="Password">
+                    <% if(message==""){ %>
+
+                    <% }else{ %>
+                    <p class="narrow links" style="color: #E02401; margin: 0;">
+                        <%= message %>
+                    </p>
+                    <% } %>
+                    <button class="btn" type="submit" id="loginBtn">LOGIN</button>
+                    <p class="narrow"> <a class="signinn links" href="/user/signup">SignUp</a></p>
+                </div>
+            </form>
+        </div>
+        <div class="right-container">
+            <div class="logo-container">
+                <img src="../assets/logo.png">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

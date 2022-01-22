@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../css/subnav.css" />
+  <link rel="stylesheet" href="../css/index.css" />
+  <link rel="stylesheet" href="../css/typography.css" />
+  <link rel="stylesheet" href="../css/navbar.css" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <title>Course</title>
+</head>
+
+<style>
+  .review-form{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  table {
+    font-family: 'Poppins', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
+
+<body style="background-color: #f9f9f9">
+  <div class="navbar-container" style="height: 110px;">
+    <div class="navlogo-container">
+      <img style="width: 150px" src="../assets/logo.png" />
+    </div>
+  </div>
+
+  <div style="padding-left: 5%; padding-top: 50px;">
+    <div class=subnav style="width: 345px; ">
+      <div class="stepper-wrapper">
+
+        <div class="stepper-item ">
+          <a href="/user/home">
+            <div class="step-counter">
+              Home
+            </div>
+          </a>
+        </div>
+        <div class="stepper-item ">
+          <div class="step-counter">
+            <%= title %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div style="padding-left: 5%; margin-top: 50px;">
+    <p class="narrow name" style="line-height: 50px;">
+      <span class="orange" style="font-size: 65px;">
+        <%= title %>
+
+
+        <a href="/course/pin"><button id="pin" class="blue narrow pin-btn"><i class="fas fa-thumbtack"></i></button></a>
+      
+        <p id="inactive" class="blue narrow" style="font-size: 25px; font-weight: 700; margin-top: -20px; margin-left: 3px; display: none;">INACTIVE</p>
+ 
+      </span> <br>
+      <span class="blue" style="font-size: 20px; margin-left: 20px;">
+        <%= level %> Level
+          <span class="orange">|</span>
+          <span id='course-duration'>xx</span>
+          <span class="orange">|</span>
+          <span id='students-enrolled'>xx</span> Enrollments
+          <span class="orange">|</span>
+          <span id='course-price'><%= price %></span> USD
+      </span>
+    </p>
+
+  </div>
+  <div class="dashboard-below-container">
+
+
+    <div class="dashboard-left" style="width: 60%;">
+
+      <div style="padding: 0px 50px 0px 100px;">
+        <!-- <p class="progress-text blue" style="font-size: 25px; margin-top: -10px; margin-left: 10px;">Progress <span class="orange">0%</span></p> -->
+        <div class="card-body card-heading" style="padding: 5%; color: #311A75; line-height: 35px; ">
+          <p>
+            <%= description %>
+          </p>
+
+          <% if(enrolled=='yes' ) { %>
+
+            <a href="/course/disenroll?courseId=<%= id %>"><button id="dis-enroll-btn" class="btn"
+                style="margin-left: 20px; background-color: #353333;" hidden>Disenroll</button></a>
+            <a href="/course/coursePage?courseId=<%= id %>"><button class="btn" style="margin-left: 20px;">Resume
+                Learning</button></a>
+
+            <% }else { %>
+              <a href="/course/enroll?courseId=<%= id %>"><button class="btn"
+                  style="margin-left: 20px;">Enroll</button></a>
+              <% } %>
+        </div>
+
+        <div id="comments-container" hidden>
+          <!-- TODO: Show comments here -->
+          <form action="/course/review/<%= id %>" id="course-review-form" method="POST"  class="review-form">
+            <input name="user_review" type="text" id="review-text">
+            <button type="submit" id="review-button" class="btn" style="margin-left: 20px; background-color: #484645;">Submit Review</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-right" style="width: 50%">
+      <p class="orange" style="
+              line-height: 35px;
+              font-size: 36px;
+              font-weight: 500;
+              color: #ffbe0b;
+            ">
+        Suggested Books
+      </p>
+      <div class="small-card-container" id="suggested-books-container" style="display: flex; flex-wrap: wrap; width: 100%;">
+
+          <div class="bookcard" id="book-card" style="height: 150px;">
+            <div class="booktitle-container">
+              <p class="booktitle">
+                Book Title
+              </p>
+            </div>
+          </div>
+         
+    </div>
+
+  </div>
+  </div>
+
+
+  </div>
+</body>
+
+</html>

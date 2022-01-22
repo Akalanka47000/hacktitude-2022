@@ -1,0 +1,146 @@
+{
+    "bugs": [
+        {
+            "desc": "Challenge 1.a - Improve the search to include results where search term is 'contained' in the course topic and description",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 4.a - Sort by Popularity button should be visible",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 5.a - Disenroll button should be not Hidden",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 5.b - Course should get Disenrolled when the Button is Clicked",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 7.a - Popular Courses Should not be displayed for enrolled users",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 7.b - Popular Courses Should be Displayed before enrolling",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 7.b - CT - Popular Courses Should be Displayed before enrolling",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 8.a - The review form is rendered only for enrolled users",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 8.b - Creating a new column in the userCourses Table.",
+            "score": 5
+        },
+        {
+            "desc": "Challenge 12.a - Not rendering the pin element when the course is not enrolled",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 12.d - Only the pinned courses should display the pin",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 16.a - Encrypting User's Email",
+            "score": 6
+        }
+    ],
+    "features": [
+        {
+            "desc": "Challenge 2.a - Displaying user grade as Novice/Beginner",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 2.b - Displaying user grade as Beginner",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 2.c - Displaying user grade as Beginner/Expert",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 3.a - Numbers of enrollments should be displayed in the course dashboard",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 4.b - Courses sorted by Popularity should be displayed",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 4.b - Courses sorted by Popularity - when 2 courses have same # of enrollments",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 6.a - Course Status should be displayed for Enrolled or Nor Enrolled",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 6.a - Course Status should be displayed for Completed",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 8.c - Reviews can be submitted from the user interface",
+            "score": 6
+        },
+        {
+            "desc": "Challenge 9.a - Displaying Average Score after submitting an MCQ",
+            "score": 6
+        },
+        {
+            "desc": "Challenge 10.a - Tag courses as 'Popular' if they are within the most enrolled 50% of the courses.",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 11.a - A new column called `last_resumed_date should be added in the userCourses Table",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 11.b - Displaying Inactive If it is more than 14 days",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 12.b - A new column called 'pinned' should be added in the userCourses Table",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 12.c - When the pin icon is clicked, `pinned` should be updated as `true`",
+            "score": 6
+        },
+        {
+            "desc": "Challenge 13.a - Displaying 10 books from Google Books API",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 14.a - Create a new column 'progress' in table 'userCourses'",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 14.b - Updating the progress Bar",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 15.a - REST API to get all the courses",
+            "score": 3
+        },
+        {
+            "desc": "Challenge 15.b - REST API to get the courses with specified count",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 15.c - REST API to get the courses according to title search",
+            "score": 1
+        },
+        {
+            "desc": "Challenge 17.a - displaying user specific converted course price",
+            "score": 6
+        },
+        {
+            "desc": "Challenge 18.a - displaying course content read time",
+            "score": 6
+        }
+    ]
+}

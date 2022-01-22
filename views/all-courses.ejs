@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/typography.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <title>All Courses</title>
+</head>
+
+
+<%- include('navbar', {page: 'all-courses'}) -%>
+<div class="search-box-container">
+    <form action="/course/search" method="POST">
+        <input name="searchVal" type="text" placeholder="Course Name" style="width: 400px;">
+        <button class="btn" style="margin-top: 0px; margin-left: -140px; border-color: white; width: 118px;">Search</button>
+        <p class="narrow links" style="color: #929497; margin-top: -10px; margin-left: 30px;">
+            <%= allcourses.length %> Courses
+        </p>
+    </form>
+    <div class="sorting-container">
+        <div>
+            <a href="/course/sort?criteria=sort_name"><button class="sort">Sort by Name</button></a>
+        </div>
+         <div>
+            <a href="/course/sort?criteria=sort_popularity"><button id="sort-by-popularity" class="sort" hidden>Sort by Popularity</button></a>
+        </div>       
+        <form>
+            <div>
+                <div class="dropdown">
+                    <div class="sort">Filter by Difficulty</div>
+                    <i class="fas fa-cloud"></i>
+                    <div class="dropdown-content">
+                        <a href="/course/sort?criteria=filter_Beginner">Beginner</a>
+                        <a href="/course/sort?criteria=filter_Intermediate">Intermediate</a>
+                        <a href="/course/sort?criteria=filter_Advanced">Advanced</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <a href="/course/allcourses"><button class="sort" style="color: #E02401;">Reset</button></a>
+    </div>
+</div>
+<div id="all_courses" class="all-courses-container">
+    <% for(var i=0; i<allcourses.length; i++){ %>
+        <a href="/course/dashboard?courseId=<%= allcourses[i].id %>">
+            <div class="small-card" id="course-card-<%= allcourses[i].id %>">
+                <div class="orange narrow">
+                    <div class="card-heading-container">
+                        <p class="card-heading" id="card-heading-<%= i %>"><%= allcourses[i].title %></p>       
+                    </div>
+    
+                 <div class="small-card-info-container">
+                    <p id="course-status-<%= allcourses[i].id %>" class="status" style="font-size: 15px;">status</p>
+                    <p class="level blue"> <%= allcourses[i].level %></p>
+                 </div>
+                </div>
+            </div>
+        </a>
+        <% } %>
+</div>
+</div>
+</div>
+</body>
+</html>
