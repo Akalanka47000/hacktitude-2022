@@ -7,7 +7,7 @@ router.get("/allcourses", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const courses = await courseService.allCourses(userId);
   res.render(
     "all-courses.ejs",
@@ -21,7 +21,6 @@ router.get("/allcourses", async (req, res) => {
       }
     }
   );
-  
 });
 
 router.get("/enrolled", async (req, res) => {
@@ -29,7 +28,7 @@ router.get("/enrolled", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const userCourses = await courseService.userCourses(userId);
   res.render(
     "enrolled.ejs",
@@ -50,7 +49,7 @@ router.post("/search", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const searchVal = req.body.searchVal;
   courseService
     .searchedCourses(userId, searchVal)
@@ -79,7 +78,7 @@ router.get("/sort", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const criteria = req.query.criteria;
   if (!criteria || criteria.indexOf("_") < 0) {
     res.render("error.ejs", {
@@ -103,7 +102,6 @@ router.get("/sort", async (req, res) => {
       }
     );
   }
-  
 });
 
 router.get("/dashboard", async (req, res) => {
@@ -111,7 +109,7 @@ router.get("/dashboard", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const courseId = req.query.courseId;
   const courseDetails = await courseService.courseDetails(userId, courseId);
   res.render(
@@ -123,11 +121,10 @@ router.get("/dashboard", async (req, res) => {
       id: courseDetails.course.id,
       back: "req.query.paramB",
       enrolled: courseDetails.enrolled,
-      books: "books",
+      books: courseDetails.course.books,
       price: courseDetails.course.price,
       duration: courseDetails.course.duration,
       ecount: courseDetails.ecount,
-      reviews: courseDetails.reviews
     },
     (error, ejs) => {
       if (error) {
@@ -145,7 +142,7 @@ router.get("/enroll", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const courseId = req.query.courseId;
   await courseService.courseEnroll(userId, courseId);
   const userCourses = await courseService.userCourses(userId);
@@ -168,7 +165,7 @@ router.get("/disenroll", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const courseId = req.query.courseId;
   await courseService.courseDisenroll(userId, courseId);
   res.redirect(`/course/dashboard?courseId=${courseId}`);
@@ -179,7 +176,7 @@ router.get("/coursePage", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const courseId = req.query.courseId;
   const courseContent = await courseService.courseContentDetails(courseId);
   res.render(
@@ -208,7 +205,7 @@ router.get("/reset", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   await courseService.resetCourses(userId);
   const userCourses = await courseService.userCourses(userId);
   res.render(
@@ -230,7 +227,7 @@ router.get("/mcq/:id", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const courseId = req.params.id;
   const courseMcq = await courseService.courseMcq(courseId);
   res.render(
@@ -253,7 +250,7 @@ router.post("/scores/:id", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const ans1 = req.body.q0_answer;
   const ans2 = req.body.q1_answer;
   const ans3 = req.body.q2_answer;
@@ -265,14 +262,18 @@ router.post("/scores/:id", async (req, res) => {
     ans3
   );
   const courseAvgScore = await courseService.courseAvgScore(courseId);
-  res.render("scores.ejs", { score: courseScore, courseAvgScore: courseAvgScore }, (error, ejs) => {
-    if (error) {
-      console.log(error);
-      res.render("error.ejs", { message: "EJS" });
-    } else {
-      res.send(ejs);
+  res.render(
+    "scores.ejs",
+    { score: courseScore, courseAvgScore: courseAvgScore },
+    (error, ejs) => {
+      if (error) {
+        console.log(error);
+        res.render("error.ejs", { message: "EJS" });
+      } else {
+        res.send(ejs);
+      }
     }
-  });
+  );
 });
 
 router.post("/review/:cid", async (req, res) => {
@@ -280,37 +281,31 @@ router.post("/review/:cid", async (req, res) => {
   if (!userId) {
     res.redirect("/");
     return;
-  } 
+  }
   const courseId = req.params.cid;
   const review = req.body.user_review;
   console.log("Review received: " + review);
   console.log("TODO: Review should be stored in the database");
-  await courseService.addReview(
-    courseId,
-    userId,
-    review
-  )
+  await courseService.addReview(courseId, userId, review);
   res.redirect(`/course/dashboard?courseId=${courseId}`);
 });
 
 router.get("/pin/:cid", async (req, res) => {
-    const userId = req.session.userId;
-    if (!userId) {
-      res.redirect("/");
-      return;
-    }
+  const userId = req.session.userId;
+  if (!userId) {
+    res.redirect("/");
+    return;
+  }
   const courseId = req.params.cid;
   //TODO implement the logic
-  
+
   res.redirect(`/course/dashboard?courseId=${courseId}`);
 });
 
-router.get("/updateProgress/:courseId/:progress", async (req, res) => {
-  
-});
+router.get("/updateProgress/:courseId/:progress", async (req, res) => {});
 
 router.get("/getHacktitudeCourses", async (req, res) => {
-  res.json({courses : ''});
+  res.json({ courses: "" });
 });
 
 module.exports = router;
