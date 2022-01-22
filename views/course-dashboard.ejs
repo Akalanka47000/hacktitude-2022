@@ -72,8 +72,9 @@
       <span class="orange" style="font-size: 65px;">
         <%= title %>
 
-
-        <a href="/course/pin"><button id="pin" class="blue narrow pin-btn"><i class="fas fa-thumbtack"></i></button></a>
+        <% if(enrolled=='yes' ) { %>
+        <a href="/course/pin/<%= id %>"><button id="pin" class="blue narrow pin-btn"><i class="fas fa-thumbtack"></i></button></a>
+        <% } %> 
       
         <p id="inactive" class="blue narrow" style="font-size: 25px; font-weight: 700; margin-top: -20px; margin-left: 3px; display: none;">INACTIVE</p>
  

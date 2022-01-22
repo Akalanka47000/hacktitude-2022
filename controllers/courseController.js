@@ -306,6 +306,7 @@ router.get("/pin/:cid", async (req, res) => {
   }
   const courseId = req.params.cid;
   //TODO implement the logic
+  await courseService.changePin(courseId, userId);
 
   res.redirect(`/course/dashboard?courseId=${courseId}`);
 });
