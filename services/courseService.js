@@ -96,6 +96,11 @@ async function updateProgress(courseId, userId, progress) {
     return courseRepository.updateProgress(courseId, userId, progress);
 }
 
+async function getHacktitudeCourses(maxResults, title) {
+    const getHacktitudeCourses = courseRepository.getHacktitudeCourses(maxResults, title);
+    return getHacktitudeCourses;
+}
+
 module.exports = {
     allCourses,
     userCourses,
@@ -112,4 +117,5 @@ module.exports = {
     addReview,
     resumeLearning,
     updateProgress,
+    getHacktitudeCourses,
 }

@@ -433,6 +433,23 @@ function updateProgress(courseId, userId, progress) {
   });
 }
 
+function getHacktitudeCourses(maxResults, title) {
+  const sql = `SELECT title, description FROM courses ${title? `WHERE title LIKE :title` : ''} ORDER BY title ASC ${maxResults ? `LIMIT ${maxResults}`: ''}`;
+  console.log(sql)
+  return new Promise((resolve, reject) => {
+    knex_db
+      .raw(sql, {
+        title : "%"+title+"%",
+      })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
 module.exports = {
   getAllCourses,
   getUserCourses,
@@ -451,4 +468,5 @@ module.exports = {
   addReview,
   resumeLearning,
   updateProgress,
+  getHacktitudeCourses,
 };

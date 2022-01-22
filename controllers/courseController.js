@@ -317,7 +317,9 @@ router.get("/updateProgress/:courseId/:progress", async (req, res) => {
 });
 
 router.get("/getHacktitudeCourses", async (req, res) => {
-  res.json({ courses: "" });
+console.log(req.query)
+  const getHacktitudeCourses = await courseService.getHacktitudeCourses(req.query.maxResults, req.query.title);
+  res.json({ courses: getHacktitudeCourses });
 });
 
 module.exports = router;
