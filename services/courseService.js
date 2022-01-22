@@ -81,6 +81,11 @@ async function addReview(courseId, userId, review) {
     return addreview;
 }
 
+async function resumeLearning(courseId, userId) {
+    const resumeLearning = courseRepository.resumeLearning(courseId, userId);
+    return resumeLearning;
+}
+
 module.exports = {
     allCourses,
     userCourses,
@@ -95,4 +100,5 @@ module.exports = {
     courseScore,
     courseAvgScore,
     addReview,
+    resumeLearning,
 }

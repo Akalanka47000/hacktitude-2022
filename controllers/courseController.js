@@ -181,6 +181,7 @@ router.get("/coursePage", async (req, res) => {
     return;
   } 
   const courseId = req.query.courseId;
+  await courseService.resumeLearning(courseId, userId);
   const courseContent = await courseService.courseContentDetails(courseId);
   res.render(
     "course-page.ejs",
