@@ -126,7 +126,8 @@ router.get("/dashboard", async (req, res) => {
       books: "books",
       price: courseDetails.course.price,
       duration: courseDetails.course.duration,
-      ecount: courseDetails.ecount
+      ecount: courseDetails.ecount,
+      reviews: courseDetails.reviews
     },
     (error, ejs) => {
       if (error) {
@@ -284,6 +285,11 @@ router.post("/review/:cid", async (req, res) => {
   const review = req.body.user_review;
   console.log("Review received: " + review);
   console.log("TODO: Review should be stored in the database");
+  await courseService.addReview(
+    courseId,
+    userId,
+    review
+  )
   res.redirect(`/course/dashboard?courseId=${courseId}`);
 });
 

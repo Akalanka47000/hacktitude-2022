@@ -152,13 +152,14 @@ function getCourseDetails(userId, courseId) {
   const sql = `SELECT * FROM courses WHERE id = ?`;
   const sql2 = `SELECT uid FROM userCourses WHERE cid = ? AND uid = ?`;
   const sql3 = `SELECT COUNT(cid) AS count FROM userCourses WHERE cid = ?`;
+  const sql4 = `SELECT u.name, c.review FROM userCourses c, users u WHERE c.uid = u.id AND c.cid = ?`;
 
   return new Promise(async (resolve, reject) => {
     let enrolled = "";
     var registeredCourses = await knex_db.raw(sql2, [courseId, userId]);
     var coursesCount = await knex_db.raw(sql3, [courseId]);
+    var reviews = await knex_db.raw(sql4, [courseId]);
     let ecount = coursesCount[0].count;
-    console.log(ecount);
     if (registeredCourses.length > 0) {
       enrolled = "yes";
     } else {
@@ -169,7 +170,7 @@ function getCourseDetails(userId, courseId) {
       .raw(sql, [courseId])
       .then((courses) => {
         let course = courses[0]
-        resolve({ course, enrolled, ecount });
+        resolve({ course, enrolled, ecount, reviews });
       }).catch((error) => {
         reject(error)
       })
@@ -358,6 +359,31 @@ function getCourseAvgScore(courseId) {
   });
 }
 
+function addReview(courseId, userId, review) {
+  const sql1 = `SELECT cid FROM userCourses WHERE cid = ? AND uid = ?`;
+  const sql2 = `UPDATE userCourses SET review = ? WHERE (cid = ? AND uid = ?)`;
+
+  return new Promise((resolve, reject) => {
+    knex_db
+      .raw(sql1, [courseId, userId])
+      .then((data) => {
+        if(data.length > 0) {
+          knex_db
+          .raw(sql2, [review, courseId, userId])
+          .then(() => {
+            resolve();
+          })
+          .catch((error) => {
+            reject(error);
+          });
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
 module.exports = {
   getAllCourses,
   getUserCourses,
@@ -373,4 +399,5 @@ module.exports = {
   getCourseAvgScore,
   getRecentCourses,
   init,
+  addReview,
 };
