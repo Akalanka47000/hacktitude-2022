@@ -45,6 +45,7 @@ exports.up = function (knex) {
       table.int("uid").notNullable().references("id").inTable("users");
       table.int("score");
       table.string("review", 255);
+      table.date("last_resumed_date");
       table.primary(["cid", "uid"]);
     });
 };

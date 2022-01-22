@@ -87,17 +87,24 @@ async function addReview(courseId, userId, review) {
   return addreview;
 }
 
+async function resumeLearning(courseId, userId) {
+    const resumeLearning = courseRepository.resumeLearning(courseId, userId);
+    return resumeLearning;
+}
+
 module.exports = {
-  allCourses,
-  userCourses,
-  searchedCourses,
-  sortedCourses,
-  courseDetails,
-  courseEnroll,
-  courseDisenroll,
-  courseContentDetails,
-  resetCourses,
-  courseMcq,
-  courseScore,
-  courseAvgScore,
-};
+    allCourses,
+    userCourses,
+    searchedCourses,
+    sortedCourses,
+    courseDetails,
+    courseEnroll,
+    courseDisenroll,
+    courseContentDetails,
+    resetCourses,
+    courseMcq,
+    courseScore,
+    courseAvgScore,
+    addReview,
+    resumeLearning,
+}

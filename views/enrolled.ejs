@@ -44,7 +44,14 @@
                                             <p class="progress-text blue">Progress <span id="progress-text-<%= courses[i].id %>" class="orange"></span>%</p>
                                             <progress class="progress" id="progress-<%= courses[i].id %>" value="0" max="100"></progress>
                                         </div>
-                                        <p class="inactive-text" id="inactive-<%= courses[i].id %>" style="display: none;">INACTIVE</p> 
+                                        <% var dt2 = new Date(); %>
+                                        <% var dt1 = new Date(); %>
+                                        <% if(courses[i].last_resumed_date){ %>
+                                        <% var dt1 = new Date(courses[i].last_resumed_date); %>
+                                        <% } %>
+                                        <% if(Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24)) >= 14){ %>
+                                        <p class="inactive-text" id="inactive-<%= courses[i].id %>">INACTIVE</p>
+                                        <% } %>
                                     </div>
                                 </a>
                                 <% }else{ %>
