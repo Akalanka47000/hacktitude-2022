@@ -92,8 +92,8 @@ async function resumeLearning(courseId, userId) {
     return resumeLearning;
 }
 
-async function getHacktitudeCourses(maxResults) {
-    const getHacktitudeCourses = courseRepository.getHacktitudeCourses(maxResults);
+async function getHacktitudeCourses(maxResults, title) {
+    const getHacktitudeCourses = courseRepository.getHacktitudeCourses(maxResults, title);
     return getHacktitudeCourses;
 }
 

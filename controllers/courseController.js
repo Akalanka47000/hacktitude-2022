@@ -306,8 +306,8 @@ router.get("/pin/:cid", async (req, res) => {
 router.get("/updateProgress/:courseId/:progress", async (req, res) => {});
 
 router.get("/getHacktitudeCourses", async (req, res) => {
-  const maxResults = req.params.maxResults;
-  const getHacktitudeCourses = await courseService.getHacktitudeCourses(maxResults || 5);
+console.log(req.query)
+  const getHacktitudeCourses = await courseService.getHacktitudeCourses(req.query.maxResults, req.query.title);
   res.json({ courses: getHacktitudeCourses });
 });
 

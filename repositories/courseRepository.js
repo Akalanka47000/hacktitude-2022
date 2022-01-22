@@ -415,11 +415,14 @@ function resumeLearning(courseId, userId) {
   });
 }
 
-function getHacktitudeCourses(maxResults) {
-  const sql = `SELECT title, description FROM courses LIMIT ?`;
+function getHacktitudeCourses(maxResults, title) {
+  const sql = `SELECT title, description FROM courses ${title? `WHERE title LIKE :title` : ''} ORDER BY title ASC ${maxResults ? `LIMIT ${maxResults}`: ''}`;
+  console.log(sql)
   return new Promise((resolve, reject) => {
     knex_db
-      .raw(sql, [maxResults])
+      .raw(sql, {
+        title : "%"+title+"%",
+      })
       .then((data) => {
         resolve(data);
       })
