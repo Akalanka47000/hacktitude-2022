@@ -45,7 +45,9 @@ describe("Post authentication tasks", () => {
   test("Challenge 18.a - displaying course content read time", async () => {
 
     const courseId = 1;
+    await authenticatedSession.get('/course/enroll?courseId=1')
     let res = await authenticatedSession.get(`/course/coursePage?courseId=${courseId}`);
+    
     document.documentElement.innerHTML = res.text;
     const element1 = document.getElementById(`read-time-1`);
     const element2 = document.getElementById(`read-time-2`);

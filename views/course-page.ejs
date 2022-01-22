@@ -62,31 +62,31 @@
         <div class="left-menu">
             <button class="coursedashChapter" onclick="changeDiv('contentlink2')" id="chapterOne"><a class="num">01</a>Chapter One</button>
           <div class="dash">
-            <button class="coursedash" onclick="changeDiv('contentlink3')" id="chapterTwo" disabled><a class="num">02</a>Chapter Two</button>
+            <button class="coursedash" onclick="changeDiv('contentlink3')" id="chapterTwo"><a class="num">02</a>Chapter Two</button>
           </div>
           <div class="dash">
-            <button class="coursedash" onclick="changeDiv('contentlink4')"  id="chapterThree" disabled><a class="num">03</a>Chapter Three</button>
+            <button class="coursedash" onclick="changeDiv('contentlink4')"  id="chapterThree"><a class="num">03</a>Chapter Three</button>
           </div>
           <div class="dash">
-            <button class="coursedash" onclick="changeDiv('contentlink1')" id="assessmentToggle" disabled>Assesment</button>
+            <button class="coursedash" onclick="changeDiv('contentlink1')" id="assessmentToggle">Assesment</button>
           </div>
         </div>
         <div class="right-menu" id="contentlink1" ><iframe name="contentlink1" src="/course/mcq/<%= id %>" width="900" height="500"></iframe> </div>
         <form id="doneForm1" action="/course/updateProgress/<%= id %>/<%= 25 %>" method="GET" onSubmit="onFormSubmit(event)">
           <div class="right-menu" id="contentlink2" style="display: block;">
-            <span class="topic2"><span id="read-time-1"><%= round((count)/(4)) %></span> seconds read</span>
+            <span class="topic2"><span id="read-time-1"><%= Math.round((chapters[0].description.split(" ").length)/(4)) %></span> seconds read</span>
             <p><%= chapters[0].description %></p> <button type="submit" id="btnChapterOne" class="btn">Mark as Done</button></div>
         </form>
 
         <form id="doneForm1" action="/course/updateProgress/<%= id %>/<%= 50 %>" method="GET">
           <div class="right-menu" id="contentlink3" >
-            <span class="topic2"><span id="read-time-2">xx</span> seconds read</span>
+            <span class="topic2"><span id="read-time-2"><%= Math.round((chapters[1].description.split(" ").length)/(4*1.05)) %></span> seconds read</span>
             <p><%= chapters[1].description %></p><button id="btnChapterTwo" class="btn" >Mark as Done</button></div>
         </form>
 
         <form id="doneForm1" action="/course/updateProgress/<%= id %>/<%= 75 %>" method="GET">
           <div class="right-menu" id="contentlink4" >
-            <span class="topic2"><span id="read-time-3">xx</span> seconds read</span>
+            <span class="topic2"><span id="read-time-3"><%= Math.round((chapters[2].description.split(" ").length)/(4*1.05*1.05)) %></span> seconds read</span>
             <p><%= chapters[2].description %></p><button id="btnChapterThree" class="btn">Mark as Done</button> </div> 
         </form>    
       </div>
@@ -123,19 +123,16 @@
           $('#btnChapterOne').click(()=>{
             document.getElementById("doneForm1").submit();
             $("#chapterTwo").removeAttr('disabled');
-            $('#btnChapterOne').prop('disabled', true);
           })
 
           $('#btnChapterTwo').click(()=>{
             document.getElementById("doneForm2").submit();
             $("#chapterThree").removeAttr('disabled');
-            $('#btnChapterTwo').prop('disabled', true);
           })
 
           $('#btnChapterThree').click(()=>{
             document.getElementById("doneForm3").submit();
             $("#assessmentToggle").removeAttr('disabled');
-            $('#btnChapterThree').prop('disabled', true);
           })
       });
           

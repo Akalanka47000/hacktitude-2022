@@ -187,7 +187,6 @@ router.get("/coursePage", async (req, res) => {
   const courseId = req.query.courseId;
   await courseService.resumeLearning(courseId, userId);
   const courseContent = await courseService.courseContentDetails(courseId);
-  const wordCount = courseContent.course.description.split(" ").length();
   res.render(
     "course-page.ejs",
     {
@@ -197,7 +196,6 @@ router.get("/coursePage", async (req, res) => {
       description: courseContent.course.description,
       id: courseContent.course.id,
       back: "req.query.paramB",
-      count: wordCount,
     },
     (error, ejs) => {
       if (error) {
