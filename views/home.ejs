@@ -46,6 +46,29 @@
                         </a>
                         to enroll.</p>
                 </div>
+                <% if (true) { %>
+                    <div id="popular-courses">
+                        <p style="font-size: 25px; font-weight: 600;" class="orange">Or get started with some of our most popular courses.</p>
+                        <div  class="popular-courses-container" id="popular-courses-container">
+                            <% for(var i=0; i<popularCourses.length; i++){ %>
+                                <a href="/course/dashboard?courseId=<%= popularCourses[i].id %>">
+                                    <div class="small-card-home">
+                                        <div class="card-heading orange narrow">
+                                            <div class="card-heading-container">
+                                                <p class="card-heading" id="card-heading-<%= i %>" style="line-height: 25px;">
+                                                    <%= popularCourses[i].title %>
+                                                </p>
+                                            </div>
+                                            <p class="level blue" style="margin-top: 20px;">
+                                                <%= popularCourses[i].level %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            <% } %>
+                        </div>
+                    </div>
+                <% } %>
             <%} else {%>
                 <div>
                     <div>
@@ -97,30 +120,6 @@
                     </div>
                 </div>
             <%}%>
-
-            <% if (courses.length == 0) { %>
-                <div id="popular-courses">
-                    <p style="font-size: 25px; font-weight: 600;" class="orange">Or get started with some of our most popular courses.</p>
-                    <div  class="popular-courses-container" id="popular-courses-container">
-                        <% for(var i=0; i<5; i++){ %>
-                            <a href="/course/dashboard?courseId=<%= popularCourses[i].id %>">
-                                <div class="small-card-home">
-                                    <div class="card-heading orange narrow">
-                                        <div class="card-heading-container">
-                                            <p class="card-heading" id="card-heading-<%= i %>" style="line-height: 25px;">
-                                                <%= popularCourses[i].title %>
-                                            </p>
-                                        </div>
-                                        <p class="level blue" style="margin-top: 20px;">
-                                            <%= popularCourses[i].level %>
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        <% } %>
-                    </div>
-                </div>
-            <% } %>
         </div>
 
 
