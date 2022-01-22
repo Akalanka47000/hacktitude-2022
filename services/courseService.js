@@ -71,6 +71,11 @@ async function courseScore(courseId, userId, ans1, ans2, ans3) {
     return courseScore;
 }
 
+async function courseAvgScore(courseId) {
+    const courseAvgScore = courseRepository.getCourseAvgScore(courseId);
+    return courseAvgScore;
+}
+
 module.exports = {
     allCourses,
     userCourses,
@@ -82,5 +87,6 @@ module.exports = {
     courseContentDetails,
     resetCourses,
     courseMcq,
-    courseScore
+    courseScore,
+    courseAvgScore
 }

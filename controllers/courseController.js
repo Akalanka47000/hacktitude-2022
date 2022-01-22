@@ -263,7 +263,8 @@ router.post("/scores/:id", async (req, res) => {
     ans2,
     ans3
   );
-  res.render("scores.ejs", { score: courseScore }, (error, ejs) => {
+  const courseAvgScore = await courseService.courseAvgScore(courseId);
+  res.render("scores.ejs", { score: courseScore, courseAvgScore: courseAvgScore }, (error, ejs) => {
     if (error) {
       console.log(error);
       res.render("error.ejs", { message: "EJS" });

@@ -336,6 +336,28 @@ function setCourseScore(courseId, userId, ans1, ans2, ans3) {
   });
 }
 
+function getCourseAvgScore(courseId) {
+  const sql = `SELECT score FROM userCourses WHERE cid = :courseId `;
+  let score = 0;
+  let count = 0;
+  return new Promise((resolve, reject) => {
+    knex_db
+      .raw(sql, { courseId: courseId })
+      .then((data) => {
+        data.forEach((d) => {
+          if(d.score>0){
+            score+=d.score
+            count++
+          }
+        })
+        resolve(Math.round(score/count));
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
 module.exports = {
   getAllCourses,
   getUserCourses,
@@ -348,6 +370,7 @@ module.exports = {
   resetEnrolledCourses,
   getCourseMcq,
   setCourseScore,
+  getCourseAvgScore,
   getRecentCourses,
   init,
 };
