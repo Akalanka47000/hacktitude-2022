@@ -32,7 +32,10 @@ function getAllCourses(userId) {
         const sql = `SELECT cid, score FROM userCourses WHERE uid = :userId`;
         knex_db
           .raw(sql, { userId: userId })
-          .then((userCourses) => {
+          .then(async (userCourses) => {
+            let popularCourses = await getSortedCourses("sort", "popularity")
+            const twentyPercentCount =  Math.ceil(popularCourses.length * 0.2);
+            popularCourses  = popularCourses.slice(0, twentyPercentCount);
             const transformedCourses = courses.map((course) => {
               if (
                 userCourses.filter((userCourse) => course.id === userCourse.cid)
@@ -49,6 +52,9 @@ function getAllCourses(userId) {
                 }
               } else {
                 course.status = "Not Enrolled";
+              }
+              if (popularCourses.filter((popularCourse) => course.id === popularCourse.cid).length > 0) {
+                course.popularStatus = 'POPULAR'
               }
               return course;
             });
