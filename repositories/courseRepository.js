@@ -118,7 +118,7 @@ function getSortedCourses(action, value) {
 }
 
 function getCourseDetails(userId, courseId) {
-  const sql = `SELECT id, title, level, description, price FROM courses WHERE id = ?`;
+  const sql = `SELECT * FROM courses WHERE id = ?`;
   const sql2 = `SELECT uid FROM userCourses WHERE cid = ? AND uid = ?`;
 
   return new Promise(async (resolve, reject) => {
@@ -166,7 +166,7 @@ function disenrollCourse(userId, courseId) {
 }
 
 function getCourseContentDetails(courseId) {
-  const sql = `SELECT id, title, level, description FROM courses WHERE id = ?`;
+  const sql = `SELECT id, title, level, description, duration FROM courses WHERE id = ?`;
   const sql1 = `SELECT description , id FROM chapters WHERE cid = ?`;
 
   return new Promise((resolve, reject) => {
