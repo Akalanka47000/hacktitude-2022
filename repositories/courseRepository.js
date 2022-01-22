@@ -120,10 +120,14 @@ function getSortedCourses(action, value) {
 function getCourseDetails(userId, courseId) {
   const sql = `SELECT * FROM courses WHERE id = ?`;
   const sql2 = `SELECT uid FROM userCourses WHERE cid = ? AND uid = ?`;
+  const sql3 = `SELECT COUNT(cid) AS count FROM userCourses WHERE cid = ?`;
 
   return new Promise(async (resolve, reject) => {
     let enrolled = "";
     var registeredCourses = await knex_db.raw(sql2, [courseId, userId]);
+    var coursesCount = await knex_db.raw(sql3, [courseId]);
+    let ecount = coursesCount[0].count;
+    console.log(ecount);
     if (registeredCourses.length > 0) {
       enrolled = "yes";
     } else {
@@ -133,7 +137,7 @@ function getCourseDetails(userId, courseId) {
     knex_db.raw(sql, [courseId])
       .then((courses) => {
         let course = courses[0]
-        resolve({ course, enrolled });
+        resolve({ course, enrolled, ecount });
       }).catch((error) => {
         reject(error)
       })
