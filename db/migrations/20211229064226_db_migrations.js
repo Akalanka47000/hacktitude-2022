@@ -13,6 +13,7 @@ exports.up = function (knex) {
       table.string("level", 255);
       table.string("description");
       table.int("price");
+      table.int("duration");
     })
     .createTable("mcqQuestions", function (table) {
       table.increments("qid").notNullable().primary();

@@ -9,7 +9,8 @@ exports.seed = function (knex) {
           level: "Beginner",
           description:
             "JavaScript is a dynamic computer programming language. JavaScript made its first appearance in Netscape 2.0 in 1995 with the name LiveScript. It is lightweight and most commonly used as a part of web pages, whose implementations allow client-side script to interact with the user and make dynamic pages. It is an interpreted programming language with object-oriented capabilities.",
-          price: 15
+          price: 15,
+          duration: "20 hours"
         },
         {
           id: 2,
@@ -17,7 +18,8 @@ exports.seed = function (knex) {
           level: "Beginner",
           description:
             ".NET is a free, cross-platform, open source developer platform for building many different types of applications.With .NET, you can use multiple languages, editors, and libraries to build for web, mobile, desktop, games, and IoT.",
-          price: 10
+          price: 10,
+          duration: "20 hours"
         },
         {
           id: 3,
@@ -25,7 +27,8 @@ exports.seed = function (knex) {
           level: "Intermediate",
           description:
             "Object-oriented programming (OOP) is a programming paradigm based on the concept of objects, which can contain data and code: data in the form of fields (often known as attributes or properties), and code, in the form of procedures (often known as methods). This will have everything about the course for people to read and get to know more about the courses that they would like to follow.The main ideas behind Java’s Object-Oriented Programming, OOP concepts include abstraction, encapsulation, inheritance and polymorphism.",
-          price: 20
+          price: 20,
+          duration: "20 hours"
         },
         {
           id: 4,
@@ -33,7 +36,8 @@ exports.seed = function (knex) {
           level: "Advanced",
           description:
             "AWS Lambda is a serverless compute service that runs your code in response to events and automatically manages the underlying compute resources for you. ..You can use AWS Lambda to extend other AWS services with custom logic, or create your own backend services that operate at AWS scale, performance, and security.",
-          price: 8
+          price: 8,
+          duration: "20 hours"
         },
         {
           id: 5,
@@ -41,7 +45,8 @@ exports.seed = function (knex) {
           level: "Intermediate",
           description:
             "Node. js (Node) is an open source development platform for executing JavaScript code server-side. Node is useful for developing applications that require a persistent connection from the browser to the server and is often used for real-time applications such as chat, news feeds and web push notifications.",
-          price: 12
+          price: 12,
+          duration: "20 hours"
         },
         {
           id: 6,
@@ -49,7 +54,8 @@ exports.seed = function (knex) {
           level: "Beginner",
           description:
             "MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas. MongoDB is developed by MongoDB Inc. and licensed under the Server Side Public License.",
-          price: 18
+          price: 18,
+          duration: "20 hours"
         },
       ]);
     });

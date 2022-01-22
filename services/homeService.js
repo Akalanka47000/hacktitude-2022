@@ -19,7 +19,7 @@ async function signInUser(email, password) {
 }
 
 async function getUserSpecificDetailsWithId(id) {
-  const noOfRecentCoursesToShow = 5;
+  const noOfRecentCoursesToShow = 4;
   return new Promise(async (resolve, reject) => {
     try {
       const user = await userRepository.getUserById(id);
