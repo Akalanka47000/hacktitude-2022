@@ -71,6 +71,11 @@ async function courseScore(courseId, userId, ans1, ans2, ans3) {
     return courseScore;
 }
 
+async function addReview(courseId, userId, review) {
+    const addreview = courseRepository.addReview(courseId, userId, review);
+    return addreview;
+}
+
 module.exports = {
     allCourses,
     userCourses,
@@ -82,5 +87,6 @@ module.exports = {
     courseContentDetails,
     resetCourses,
     courseMcq,
-    courseScore
+    courseScore,
+    addReview,
 }

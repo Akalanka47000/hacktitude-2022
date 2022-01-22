@@ -115,12 +115,18 @@
               <% } %>
         </div>
 
-        <div id="comments-container" hidden>
+        <div id="comments-container">
           <!-- TODO: Show comments here -->
+          <h3>Course reviews:</h3>
+          <% for(var i=0; i<reviews.length; i++){ %>
+            <p><b><%= reviews[i].name %></b> : <%= reviews[i].review %></p>
+          <% } %>
+          <% if(enrolled=='yes' ) { %>
           <form action="/course/review/<%= id %>" id="course-review-form" method="POST"  class="review-form">
             <input name="user_review" type="text" id="review-text">
             <button type="submit" id="review-button" class="btn" style="margin-left: 20px; background-color: #484645;">Submit Review</button>
           </form>
+          <% } %>
         </div>
       </div>
     </div>
