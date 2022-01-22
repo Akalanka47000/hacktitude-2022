@@ -52,7 +52,8 @@ router.get("/home", async (req, res) => {
           userName: data.user.name,
           userId: data.user.id,
           courses: data.userCourses,
-          recentCourses: data.recentCourses, //TODO
+          recentCourses: data.recentCourses,
+          popularCourses: data.popularCourses,
         });
       })
       .catch((error) => {

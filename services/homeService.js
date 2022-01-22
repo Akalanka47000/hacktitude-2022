@@ -27,7 +27,8 @@ async function getUserSpecificDetailsWithId(id) {
       const recentCourses = await courseRepository.getRecentCourses(
         noOfRecentCoursesToShow
       );
-      resolve((merged = { user, userCourses, recentCourses }));
+      const popularCourses = await courseRepository.getSortedCourses('sort', 'popularity');
+      resolve((merged = { user, userCourses, recentCourses, popularCourses }));
     } catch (error) {
       reject(error);
     }
