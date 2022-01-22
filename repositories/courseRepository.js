@@ -415,6 +415,20 @@ function resumeLearning(courseId, userId) {
   });
 }
 
+function getHacktitudeCourses(maxResults) {
+  const sql = `SELECT title, description FROM courses LIMIT ?`;
+  return new Promise((resolve, reject) => {
+    knex_db
+      .raw(sql, [maxResults])
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
 module.exports = {
   getAllCourses,
   getUserCourses,
@@ -432,4 +446,5 @@ module.exports = {
   init,
   addReview,
   resumeLearning,
+  getHacktitudeCourses,
 };

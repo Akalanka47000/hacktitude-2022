@@ -92,6 +92,11 @@ async function resumeLearning(courseId, userId) {
     return resumeLearning;
 }
 
+async function getHacktitudeCourses(maxResults) {
+    const getHacktitudeCourses = courseRepository.getHacktitudeCourses(maxResults);
+    return getHacktitudeCourses;
+}
+
 module.exports = {
     allCourses,
     userCourses,
@@ -107,4 +112,5 @@ module.exports = {
     courseAvgScore,
     addReview,
     resumeLearning,
+    getHacktitudeCourses,
 }
