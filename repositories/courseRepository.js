@@ -33,9 +33,9 @@ function getAllCourses(userId) {
         knex_db
           .raw(sql, { userId: userId })
           .then(async (userCourses) => {
-            let popularCourses = await getSortedCourses("sort", "popularity")
-            const twentyPercentCount =  Math.ceil(popularCourses.length * 0.2);
-            popularCourses  = popularCourses.slice(0, twentyPercentCount);
+            let popularCourses = await getSortedCourses("sort", "popularity");
+            const twentyPercentCount = Math.ceil(popularCourses.length * 0.2);
+            popularCourses = popularCourses.slice(0, twentyPercentCount);
             const transformedCourses = courses.map((course) => {
               if (
                 userCourses.filter((userCourse) => course.id === userCourse.cid)
@@ -53,8 +53,12 @@ function getAllCourses(userId) {
               } else {
                 course.status = "Not Enrolled";
               }
-              if (popularCourses.filter((popularCourse) => course.id === popularCourse.cid).length > 0) {
-                course.popularStatus = 'POPULAR'
+              if (
+                popularCourses.filter(
+                  (popularCourse) => course.id === popularCourse.cid
+                ).length > 0
+              ) {
+                course.popularStatus = "POPULAR";
               }
               return course;
             });
@@ -78,7 +82,7 @@ function getUserCourses(userID) {
       .raw(sql, [userID])
       .then((courses) => {
         const injectedString = courses.map((c) => `'${c.cid}'`).join(", ");
-        const sql2 = `SELECT courses.id, courses.title, userCourses.score, userCourses.last_resumed_date FROM courses INNER JOIN userCourses WHERE id IN (${injectedString}) AND courses.id == userCourses.cid AND userCourses.uid = ?`;
+        const sql2 = `SELECT courses.id, courses.title, userCourses.score, userCourses.progress, userCourses.last_resumed_date FROM courses INNER JOIN userCourses WHERE id IN (${injectedString}) AND courses.id == userCourses.cid AND userCourses.uid = ?`;
 
         knex_db
           .raw(sql2, [userID])
@@ -175,10 +179,11 @@ function getCourseDetails(userId, courseId) {
     knex_db
       .raw(sql, [courseId])
       .then((courses) => {
-        let course = courses[0]
+        let course = courses[0];
         resolve({ course, enrolled, ecount, reviews });
-      }).catch((error) => {
-        reject(error)
+      })
+      .catch((error) => {
+        reject(error);
       })
       .catch((error) => {
         reject(error);
@@ -352,12 +357,12 @@ function getCourseAvgScore(courseId) {
       .raw(sql, { courseId: courseId })
       .then((data) => {
         data.forEach((d) => {
-          if(d.score>0){
-            score+=d.score
-            count++
+          if (d.score > 0) {
+            score += d.score;
+            count++;
           }
-        })
-        resolve(Math.round(score/count));
+        });
+        resolve(Math.round(score / count));
       })
       .catch((error) => {
         reject(error);
@@ -373,15 +378,15 @@ function addReview(courseId, userId, review) {
     knex_db
       .raw(sql1, [courseId, userId])
       .then((data) => {
-        if(data.length > 0) {
+        if (data.length > 0) {
           knex_db
-          .raw(sql2, [review, courseId, userId])
-          .then(() => {
-            resolve();
-          })
-          .catch((error) => {
-            reject(error);
-          });
+            .raw(sql2, [review, courseId, userId])
+            .then(() => {
+              resolve();
+            })
+            .catch((error) => {
+              reject(error);
+            });
         }
       })
       .catch((error) => {
@@ -395,11 +400,9 @@ function resumeLearning(courseId, userId) {
   const sql2 = `UPDATE userCourses SET last_resumed_date = ? WHERE (cid = ? AND uid = ?)`;
 
   return new Promise((resolve, reject) => {
-    knex_db
-      .raw(sql1, [courseId, userId])
-      .then((data) => {
-        if(data.length > 0) {
-          knex_db
+    knex_db.raw(sql1, [courseId, userId]).then((data) => {
+      if (data.length > 0) {
+        knex_db
           .raw(sql2, [new Date().toISOString().slice(0, 10), courseId, userId])
           .then(() => {
             resolve();
@@ -407,7 +410,22 @@ function resumeLearning(courseId, userId) {
           .catch((error) => {
             reject(error);
           });
-        }
+      }
+    });
+  });
+}
+function updateProgress(courseId, userId, progress) {
+  const sql = `UPDATE userCourses SET progress = :progress WHERE (cid = :courseId AND uid = :userId)`;
+
+  return new Promise((resolve, reject) => {
+    knex_db
+      .raw(sql, {
+        courseId: courseId,
+        userId: userId,
+        progress: progress,
+      })
+      .then(() => {
+        resolve();
       })
       .catch((error) => {
         reject(error);
@@ -432,4 +450,5 @@ module.exports = {
   init,
   addReview,
   resumeLearning,
+  updateProgress,
 };

@@ -92,6 +92,10 @@ async function resumeLearning(courseId, userId) {
     return resumeLearning;
 }
 
+async function updateProgress(courseId, userId, progress) {
+    return courseRepository.updateProgress(courseId, userId, progress);
+}
+
 module.exports = {
     allCourses,
     userCourses,
@@ -107,4 +111,5 @@ module.exports = {
     courseAvgScore,
     addReview,
     resumeLearning,
+    updateProgress,
 }

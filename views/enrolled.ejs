@@ -41,8 +41,8 @@
                                             </p>
                                         </div>
                                         <div class="progress-container">
-                                            <p class="progress-text blue">Progress <span id="progress-text-<%= courses[i].id %>" class="orange"></span>%</p>
-                                            <progress class="progress" id="progress-<%= courses[i].id %>" value="0" max="100"></progress>
+                                            <p class="progress-text blue">Progress <span id="progress-text-<%= courses[i].id %>" class="orange"><%= courses[i].progress %></span>%</p>
+                                            <progress class="progress" id="progress-<%= courses[i].id %>" value="<%= courses[i].progress %>" max="100"></progress>
                                         </div>
                                         <% var dt2 = new Date(); %>
                                         <% var dt1 = new Date(); %>
