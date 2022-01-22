@@ -456,13 +456,12 @@ function getHacktitudeCourses(maxResults, title) {
 function changePin(courseId, userId) {
   const sql1 = `SELECT pinned FROM userCourses WHERE cid = ? AND uid = ?`;
   const sql2 = `UPDATE userCourses SET pinned = ? WHERE (cid = ? AND uid = ?)`;
-
+console.log(courseId)
   return new Promise((resolve, reject) => {
     knex_db
       .raw(sql1, [courseId, userId])
       .then((data) => {
-        let pinned = !(data.pinned);
-        console.log("pin: " + pinned);
+        let pinned = data[0].pinned ? 0 : 1;
           knex_db
             .raw(sql2, [pinned, courseId, userId])
             .then(() => {
