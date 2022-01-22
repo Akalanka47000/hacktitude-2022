@@ -167,6 +167,7 @@ router.get("/disenroll", async (req, res) => {
     return;
   } 
   const courseId = req.query.courseId;
+  await courseService.courseDisenroll(userId, courseId);
   res.redirect(`/course/dashboard?courseId=${courseId}`);
 });
 

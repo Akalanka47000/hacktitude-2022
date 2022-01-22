@@ -46,6 +46,11 @@ async function courseEnroll(userId, courseId) {
     return courses;
 }
 
+async function courseDisenroll(userId, courseId) {
+    const courses = courseRepository.disenrollCourse(userId, courseId);
+    return courses;
+}
+
 async function courseContentDetails(userId, courseId) {
     const courses = courseRepository.getCourseContentDetails(userId, courseId);
     return courses;
@@ -73,6 +78,7 @@ module.exports = {
     sortedCourses,
     courseDetails,
     courseEnroll,
+    courseDisenroll,
     courseContentDetails,
     resetCourses,
     courseMcq,
