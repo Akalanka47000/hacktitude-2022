@@ -72,18 +72,23 @@
           </div>
         </div>
         <div class="right-menu" id="contentlink1" ><iframe name="contentlink1" src="/course/mcq/<%= id %>" width="900" height="500"></iframe> </div>
+        <form id="doneForm1" action="/course/updateProgress/<%= id %>/<%= 25 %>" method="GET" onSubmit="onFormSubmit(event)">
+          <div class="right-menu" id="contentlink2" style="display: block;">
+            <span class="topic2"><span id="read-time-1">xx</span> seconds read</span>
+            <p><%= chapters[0].description %></p> <button type="submit" id="btnChapterOne" class="btn">Mark as Done</button></div>
+        </form>
 
-        <div class="right-menu" id="contentlink2" style="display: block;">
-          <span class="topic2"><span id="read-time-1">xx</span> seconds read</span>
-          <p><%= chapters[0].description %></p> <button id="btnChapterOne" class="btn">Mark as Done</button></div>
+        <form id="doneForm1" action="/course/updateProgress/<%= id %>/<%= 50 %>" method="GET">
+          <div class="right-menu" id="contentlink3" >
+            <span class="topic2"><span id="read-time-2">xx</span> seconds read</span>
+            <p><%= chapters[1].description %></p><button id="btnChapterTwo" class="btn" >Mark as Done</button></div>
+        </form>
 
-        <div class="right-menu" id="contentlink3" >
-          <span class="topic2"><span id="read-time-2">xx</span> seconds read</span>
-          <p><%= chapters[1].description %></p><button id="btnChapterTwo" class="btn">Mark as Done</button></div>
-
-        <div class="right-menu" id="contentlink4" >
-          <span class="topic2"><span id="read-time-3">xx</span> seconds read</span>
-          <p><%= chapters[2].description %></p><button id="btnChapterThree" class="btn">Mark as Done</button> </div>     
+        <form id="doneForm1" action="/course/updateProgress/<%= id %>/<%= 75 %>" method="GET">
+          <div class="right-menu" id="contentlink4" >
+            <span class="topic2"><span id="read-time-3">xx</span> seconds read</span>
+            <p><%= chapters[2].description %></p><button id="btnChapterThree" class="btn">Mark as Done</button> </div> 
+        </form>    
       </div>
       <script>
         function changeDiv(value) {
@@ -116,16 +121,19 @@
 
         $(function() {
           $('#btnChapterOne').click(()=>{
+            document.getElementById("doneForm1").submit();
             $("#chapterTwo").removeAttr('disabled');
             $('#btnChapterOne').prop('disabled', true);
           })
 
           $('#btnChapterTwo').click(()=>{
+            document.getElementById("doneForm2").submit();
             $("#chapterThree").removeAttr('disabled');
             $('#btnChapterTwo').prop('disabled', true);
           })
 
           $('#btnChapterThree').click(()=>{
+            document.getElementById("doneForm3").submit();
             $("#assessmentToggle").removeAttr('disabled');
             $('#btnChapterThree').prop('disabled', true);
           })

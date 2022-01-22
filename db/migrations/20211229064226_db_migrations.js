@@ -44,6 +44,7 @@ exports.up = function (knex) {
       table.int("cid").notNullable().references("id").inTable("courses");
       table.int("uid").notNullable().references("id").inTable("users");
       table.int("score");
+      table.int('progress').notNullable().defaultTo(0);
       table.string("review", 255);
       table.primary(["cid", "uid"]);
     });

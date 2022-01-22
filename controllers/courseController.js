@@ -306,6 +306,15 @@ router.get("/pin/:cid", async (req, res) => {
 });
 
 router.get("/updateProgress/:courseId/:progress", async (req, res) => {
+  const userId = req.session.userId;
+    if (!userId) {
+      res.redirect("/");
+      return;
+    }
+  const courseId = req.params.courseId;
+  const progress = req.params.progress;
+  await courseService.updateProgress(courseId, userId, progress)
+  res.redirect(`/course/coursePage?courseId=${courseId}`);
   
 });
 

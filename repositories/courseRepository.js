@@ -78,7 +78,7 @@ function getUserCourses(userID) {
       .raw(sql, [userID])
       .then((courses) => {
         const injectedString = courses.map((c) => `'${c.cid}'`).join(", ");
-        const sql2 = `SELECT courses.id, courses.title, userCourses.score FROM courses INNER JOIN userCourses WHERE id IN (${injectedString}) AND courses.id == userCourses.cid AND userCourses.uid = ?`;
+        const sql2 = `SELECT courses.id, courses.title, userCourses.score, userCourses.progress FROM courses INNER JOIN userCourses WHERE id IN (${injectedString}) AND courses.id == userCourses.cid AND userCourses.uid = ?`;
 
         knex_db
           .raw(sql2, [userID])
@@ -390,6 +390,25 @@ function addReview(courseId, userId, review) {
   });
 }
 
+function updateProgress(courseId, userId, progress) {
+  const sql = `UPDATE userCourses SET progress = :progress WHERE (cid = :courseId AND uid = :userId)`;
+
+  return new Promise((resolve, reject) => {
+    knex_db
+      .raw(sql, {
+        courseId: courseId,
+        userId: userId,
+        progress: progress,
+      })
+      .then(() => {
+        resolve()
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
 module.exports = {
   getAllCourses,
   getUserCourses,
@@ -406,4 +425,5 @@ module.exports = {
   getRecentCourses,
   init,
   addReview,
+  updateProgress,
 };

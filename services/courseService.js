@@ -81,6 +81,10 @@ async function addReview(courseId, userId, review) {
     return addreview;
 }
 
+async function updateProgress(courseId, userId, progress) {
+    return courseRepository.updateProgress(courseId, userId, progress);
+}
+
 module.exports = {
     allCourses,
     userCourses,
@@ -95,4 +99,5 @@ module.exports = {
     courseScore,
     courseAvgScore,
     addReview,
+    updateProgress,
 }
