@@ -48,6 +48,8 @@ router.get("/home", async (req, res) => {
     homeService
       .getUserSpecificDetailsWithId(userId)
       .then((data) => {
+        console.log(data.userCourses.length)
+        console.log(data.popularCourses)
         res.render("home.ejs", {
           userName: data.user.name,
           userId: data.user.id,
