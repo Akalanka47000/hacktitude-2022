@@ -163,12 +163,15 @@ function getCourseDetails(userId, courseId) {
   const sql2 = `SELECT uid FROM userCourses WHERE cid = ? AND uid = ?`;
   const sql3 = `SELECT COUNT(cid) AS count FROM userCourses WHERE cid = ?`;
   const sql4 = `SELECT u.name, c.review FROM userCourses c, users u WHERE c.uid = u.id AND c.cid = ?`;
+  const sql5 = `SELECT country_currency FROM users WHERE id = ?`;
 
   return new Promise(async (resolve, reject) => {
     let enrolled = "";
     var registeredCourses = await knex_db.raw(sql2, [courseId, userId]);
     var coursesCount = await knex_db.raw(sql3, [courseId]);
     var reviews = await knex_db.raw(sql4, [courseId]);
+    let toData = await knex_db.raw(sql5, [userId]);
+    const to = toData[0].country_currency
     let ecount = coursesCount[0].count;
     if (registeredCourses.length > 0) {
       enrolled = "yes";
@@ -180,7 +183,7 @@ function getCourseDetails(userId, courseId) {
       .raw(sql, [courseId])
       .then((courses) => {
         let course = courses[0];
-        resolve({ course, enrolled, ecount, reviews });
+        resolve({ course, enrolled, ecount, reviews, to });
       })
       .catch((error) => {
         reject(error);
