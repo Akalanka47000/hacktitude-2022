@@ -81,7 +81,10 @@ function getSortedCourses(action, value) {
     if (action == "sort") {
       if (value == "name") {
         sql = `SELECT id, title, level FROM courses ORDER BY title`;
-      } 
+      }
+      if(value == "popularity"){
+        sql = `SELECT c.id, c.title, c.level, uc.cid, COUNT(uc.uid) FROM courses c, userCourses uc  WHERE c.id=uc.cid GROUP BY uc.cid ORDER BY COUNT(uc.uid) DESC, c.title`;
+      }
       knex_db
         .raw(sql)
         .then((courses) => {
